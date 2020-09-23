@@ -4,6 +4,22 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+  state ={                      //class property which hold array of objects
+    person: [
+      {name:"Niraj"},
+      {name:"Vijay"}
+    ]
+  }
+stateHandler = () => {    //ES6 method to listen to button click
+this.setState({         //setState is special method which merges/overrides the new state with old state
+                        // and then display the output on screen 
+     person: [
+      {name:"Niraj Rasal"},
+      {name:"Vijay Chavan"}
+  ]
+})
+}
+
   render() {
     return (
       <div className="App">
@@ -14,8 +30,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Person name="Niraj" />
-        <Person name="Vijay">and i'am 20 years old</Person>
+        <button onClick={this.stateHandler}>Click to see full name</button>
+        <Person name={this.state.person[0].name} />
+        <Person name={this.state.person[1].name}>and i'am 20 years old</Person>
       </div>
     ); 
 
