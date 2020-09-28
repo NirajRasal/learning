@@ -1,24 +1,40 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
-
-class App extends Component {
-  state ={                      //class property which hold array of objects
+import Person from './Person/Person';     //imported person.js file
+ 
+class App extends Component {   //class based component
+  state ={                      //class property which hold array of objects 
     person: [
       {name:"Niraj"},
       {name:"Vijay"}
     ]
   }
-stateHandler = () => {    //ES6 method to listen to button click
+stateHandler = ( name ) => {    //ES6 method to listen to button click
 this.setState({         //setState is special method which merges/overrides the new state with old state
                         // and then display the output on screen 
      person: [
-      {name:"Niraj Rasal"},
+      {name:"Nir"},
       {name:"Vijay Chavan"}
   ]
 })
 }
+StateHandler = ( name ) => {    
+  this.setState({         //passing name attribute dynamically using bind method 
+       person: [
+        {name:name},
+        {name:"Vijay Chavan"}
+    ]
+  })
+  }
+nameChangeHandler = ( event ) => {    
+  this.setState({        //used onChange event to change the name to user's choice 
+       person: [
+        {name: event.target.value },
+        {name:"Vijay"}
+    ]
+  })
+  }
 
   render() {
     return (
@@ -30,9 +46,11 @@ this.setState({         //setState is special method which merges/overrides the 
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={this.stateHandler}>Click to see full name</button>
-        <Person name={this.state.person[0].name} />
-        <Person name={this.state.person[1].name}>and i'am 20 years old</Person>
+        <button onClick={this.StateHandler.bind(this,'NIRAJ')}>Click to see full name</button>
+        <Person
+         name={this.state.person[0].name} changed={this.nameChangeHandler}/>
+        <Person
+          name={this.state.person[1].name} click={this.stateHandler}>and i'am 20 years old</Person>
       </div>
     ); 
 
